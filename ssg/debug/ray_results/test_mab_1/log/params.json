@@ -1,0 +1,49 @@
+{
+  "create_env_on_driver": false,
+  "env": "env_creator",
+  "framework": "torch",
+  "gamma": 0.99,
+  "lambda": 0.9,
+  "lr": 0.0001,
+  "model": {
+    "conv_filters": [
+      [
+        16,
+        [
+          4,
+          4
+        ],
+        4
+      ],
+      [
+        32,
+        [
+          4,
+          4
+        ],
+        4
+      ],
+      [
+        256,
+        [
+          8,
+          8
+        ],
+        2
+      ]
+    ],
+    "custom_model": "graph_extractor",
+    "post_fcnet_hiddens": [
+      256,
+      256,
+      256
+    ]
+  },
+  "num_gpus": 0,
+  "num_sgd_iter": 30,
+  "num_workers": 8,
+  "rollout_fragment_length": 512,
+  "seed": 0,
+  "sgd_minibatch_size": 128,
+  "train_batch_size": 4096
+}

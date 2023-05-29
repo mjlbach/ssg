@@ -1,0 +1,91 @@
+# @package _global_
+task: relational_search
+
+# The length of num_envs must match scene_ids if used
+scene_ids:
+  - Beechwood_0_int
+  - Beechwood_1_int
+  # - Benevolence_0_int
+  # - Benevolence_1_int
+  # - Benevolence_2_int
+  # - Ihlen_0_int
+  # - Ihlen_1_int
+  # - Merom_0_int
+  # - Merom_1_int
+  # # - Pomaria_0_int
+  # - Pomaria_1_int
+  # - Pomaria_2_int
+  # # - Rs_int
+  # - Wainscott_0_int
+  # # - Wainscott_1_int
+
+num_envs: 12
+
+dist_tol: 1
+
+load_object_categories: NULL
+
+not_load_object_categories:
+  - carpet
+  - coffee_maker
+  - potted_plant
+  - sofa
+  - straight_chair
+
+output:
+- rgb
+- depth
+- scene_graph
+- task_obs
+- task_graph_obs
+
+use_egocentric_projection: true
+full_observability: false
+preseed_scenegraph: all_no_goal
+
+model:
+  custom_model: graph_extractor
+  custom_model_config:
+    graph_model: HFAM
+  conv_filters: [[16, [4, 4], 4], [32, [4, 4], 4], [256, [8, 8], 2]]
+
+  # For each MLP extractor
+  fcnet_hiddens: [ 128, 128, 128]
+  fcnet_activation: relu
+
+  # For after the MLP extractor before logits/values
+  post_fcnet_hiddens: [ 128, 128, 128]
+  post_fcnet_activation: relu
+
+
+use_onehot_categorical: false
+
+node_features: 
+  - local_pos
+  - bbox
+  - cat
+  - semantic_class
+
+edge_features:
+    inRoom:
+      - inRoom
+    roomConnected:
+      - roomConnected
+    inside:
+      - inside
+    onTop:
+      - onTop
+    under:
+      - under
+
+# rewards
+reward_functions:
+- search
+- potential
+
+# Reward scaling
+pixel_reward_scaling: 350.0
+potential_reward_scaling: 1.0
+success_reward_scaling: 10.0
+visitation_reward_scaling: 750 # 750
+geodesic_reward_scaling: 1 # 750

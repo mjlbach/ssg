@@ -1,0 +1,40 @@
+# @package _global_
+experiment_name: transport_1
+
+task: transport
+
+# Robot parameters (need to use special transport robot)
+robot:
+  name: FetchMagic
+  action_type: discrete
+  action_normalize: true
+  proprio_obs:
+    - dd_base_lin_vel
+    - dd_base_ang_vel
+  base_name: null
+  scale: 1.0
+  self_collision: false
+  rendering_params: null
+  controller_config:
+    base:
+      name: DifferentialDriveController
+
+load_object_categories: [ agent, floor ]
+
+output:
+- rgb
+- depth
+- multichannel_map
+
+use_egocentric_projection: true
+
+# rewards
+reward_functions:
+- pick
+- place
+- potential
+
+# Reward scaling
+pick_reward_scaling: 2.5
+place_reward_scaling: 5
+potential_reward_scaling: 0.5

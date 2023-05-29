@@ -1,0 +1,41 @@
+# @package _global_
+
+defaults:
+  - /task/exploratory_search@_here_
+  - /environment/single_env@_here_
+
+model:
+  custom_model: graph_extractor
+  custom_model_config:
+    graph_model: HSAML
+  conv_filters: [[16, [4, 4], 4], [32, [4, 4], 4], [256, [8, 8], 2]]
+
+  # For each MLP extractor
+  fcnet_hiddens: [ 128, 128, 128]
+  fcnet_activation: relu
+
+  # For after the MLP extractor before logits/values
+  post_fcnet_hiddens: [ 128, 128, 128]
+  post_fcnet_activation: relu
+
+use_onehot_categorical: true
+
+node_features: 
+  - local_pos
+  - bbox
+  - cat
+  - semantic_class_categorical
+
+edge_features:
+    inRoom:
+      - inRoom
+    roomConnected:
+      - roomConnected
+    inside:
+      - inside
+    onTop:
+      - onTop
+    under:
+      - under
+
+task: relational_search_simple

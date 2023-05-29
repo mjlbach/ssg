@@ -1,0 +1,51 @@
+# @package _global_
+task: relational_search
+
+# The length of num_envs must match scene_ids if used
+scene_id: Wainscott_0_int
+
+num_envs: 8
+
+dist_tol: 1
+
+load_object_categories: NULL
+
+not_load_object_categories: 
+  - carpet
+  - coffee_maker
+  - potted_plant
+  - sofa
+  - straight_chair
+
+output:
+- rgb
+- depth
+- task_obs
+
+use_egocentric_projection: true
+use_onehot_categorical: false
+full_observability: false
+
+model:
+  custom_model: graph_extractor
+  conv_filters: [[16, [4, 4], 4], [32, [4, 4], 4], [256, [8, 8], 2]]
+
+  # For each MLP extractor
+  fcnet_hiddens: [ 128, 128, 128]
+  fcnet_activation: relu
+
+  # For after the MLP extractor before logits/values
+  post_fcnet_hiddens: [ 128, 128, 128]
+  post_fcnet_activation: relu
+
+# rewards
+reward_functions:
+- search
+- potential
+
+# Reward scaling
+pixel_reward_scaling: 350.0
+potential_reward_scaling: 1.0
+success_reward_scaling: 10.0
+visitation_reward_scaling: 750 # 750
+geodesic_reward_scaling: 1 # 750

@@ -1,0 +1,28 @@
+name: ssg
+channels:               
+  - pytorch-lts         
+  - nvidia              
+  - conda-forge         
+  # - anaconda            
+dependencies:           
+  - python=3.8          
+  - pip                 
+  - pytorch
+  - torchvision        
+  - ipython
+  - tensorboard   
+  - numba
+  - h5py
+  - numpy=1.20.3
+  - pip:               
+    - -f https://data.pyg.org/whl/torch-1.10.0+cpu.html
+    - pdbpp
+    - ipython
+    - hydra-core
+    - open3d
+    - torch-scatter
+    - torch-sparse
+    - torch-cluster
+    - torch-spline-conv
+    - torch-geometric
+    # - hydra-submitit-launcher

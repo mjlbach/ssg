@@ -1,0 +1,19 @@
+# @package _global_
+
+node_features: 
+  - local_pos
+  - bbox
+  - cat
+  - semantic_class
+
+edge_features:
+    inRoom:
+      - inRoom
+    roomConnected:
+      - roomConnected
+    inside:
+      - inside
+    onTop:
+      - onTop
+    under:
+      - under

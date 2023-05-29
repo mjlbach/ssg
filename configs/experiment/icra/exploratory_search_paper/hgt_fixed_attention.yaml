@@ -1,0 +1,17 @@
+# @package _global_
+
+defaults:
+  - /task/exploratory_search@_here_
+  - /graph_structure/heterogeneous.yaml@_here_
+  - /model/hfam@_here_
+  - /environment/single_env@_here_
+
+output:
+  - rgb
+  - depth
+  - scene_graph
+  - task_obs
+  - task_graph_obs
+
+use_onehot_categorical: false
+task: relational_search_simple

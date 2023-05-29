@@ -1,0 +1,15 @@
+# @package _global_
+
+model:
+  custom_model: graph_extractor
+  custom_model_config:
+    graph_model: HFAM
+  conv_filters: [[16, [4, 4], 4], [32, [4, 4], 4], [256, [8, 8], 2]]
+
+  # For each MLP extractor
+  fcnet_hiddens: [ 128, 128, 128]
+  fcnet_activation: relu
+
+  # For after the MLP extractor before logits/values
+  post_fcnet_hiddens: [ 128, 128, 128]
+  post_fcnet_activation: relu

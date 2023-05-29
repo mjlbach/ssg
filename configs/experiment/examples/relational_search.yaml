@@ -1,0 +1,72 @@
+# @package _global_
+task: relational_search
+
+scene_id: Wainscott_0_int
+
+robot:
+  name: Simplefetch
+  action_type: discrete
+  action_normalize: true
+  proprio_obs:
+    - trunk_qpos
+    - camera_qpos
+  reset_joint_pos: null
+  base_name: null
+  scale: 1.0
+  self_collision: true
+  rendering_params: null
+  rigid_trunk: false
+  default_trunk_offset: 0.365
+  controller_config:
+    base:
+      name: DifferentialDriveController
+    camera:
+      name: JointController
+
+dist_tol: 1
+
+load_object_categories: NULL
+# load_object_categories:
+#   - breakfast_table
+#   - bottom_cabinet
+#   - console_table
+#   - table_lamp
+#   - armchair
+#   - sofa
+#   - floor_lamp
+#   - coffee_table
+#   - bed
+#   - sink
+#   - toilet
+#   - bottom_cabinet_no_top
+#   - countertop
+#   - stove
+#   - shelf
+#
+not_load_object_categories: 
+  - carpet
+  - coffee_maker
+  - potted_plant
+  - sofa
+  - straight_chair
+
+output:
+- rgb
+- depth
+- multichannel_map 
+
+use_egocentric_projection: true
+full_observability: false
+preseed_scenegraph: all_no_goal
+
+# rewards
+reward_functions:
+- search
+- potential
+
+# Reward scaling
+pixel_reward_scaling: 350.0
+potential_reward_scaling: 1.0
+success_reward_scaling: 10.0
+visitation_reward_scaling: 750 # 750
+geodesic_reward_scaling: 1 # 750

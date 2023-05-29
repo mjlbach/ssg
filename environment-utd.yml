@@ -1,0 +1,25 @@
+name: ssg-utd
+channels:
+  - pytorch
+  - pyg
+  - conda-forge
+  - nvidia
+  - anaconda
+dependencies:
+  - python=3.8
+  - pip
+  - pytorch
+  - torchvision
+  - torchaudio
+  - cudatoolkit=11.3
+  - pyg
+  - gym=0.21
+  - hydra-core
+  - pdbpp
+  - tensorboard
+  - dvc-s3
+  - numba
+  - numpy=1.20.3
+  - pip:
+    - hydra-submitit-launcher
+    - open3d>=0.14.1

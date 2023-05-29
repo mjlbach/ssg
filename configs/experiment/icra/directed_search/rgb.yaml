@@ -1,0 +1,46 @@
+# @package _global_
+task: choice
+scene_id: Rs_int
+
+# For speeding up sampling
+merge_fixed_links: false
+
+dist_tol: 0.75
+
+load_object_categories: [ agent, floor ]
+
+output:
+- rgb
+- depth
+- task_obs
+
+# Do not enable this or you will include objects in the "holding" region outside the map
+full_observability: False
+use_onehot_categorical: False
+
+model:
+  custom_model: graph_extractor
+  conv_filters: [[16, [4, 4], 4], [32, [4, 4], 4], [256, [8, 8], 2]]
+
+  # For each MLP extractor
+  fcnet_hiddens: [ 128, 128, 128]
+  fcnet_activation: relu
+
+  # For after the MLP extractor before logits/values
+  post_fcnet_hiddens: [ 128, 128, 128]
+  post_fcnet_activation: relu
+
+# rewards
+reward_functions:
+- choice
+- potential
+- failure
+
+termination_functions:
+- choice
+- failure
+
+# Reward scaling
+choice_scaling: 10.0
+failure_scaling: 5.0
+potential_reward_scaling: 1.0

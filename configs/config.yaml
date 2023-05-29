@@ -1,0 +1,107 @@
+# Whatever is in this file will override the experiment
+defaults:
+  # - experiment/search_unnormalized.yaml@_global_
+  # - override hydra/launcher: joblib
+  - node/cluster
+  - _self_
+
+# Training params
+eval_freq: 20000
+debug: false
+training_timesteps: 5000000
+save_freq: 50000
+resume: true
+seed: 0
+
+# scene
+scene: igibson
+
+# Environment params
+mode: "headless"
+clutter: false
+hide_robot: true
+build_graph: true
+load_texture: true
+pybullet_load_texture: false
+# should_open_all_doors: true
+texture_scale: 0.5
+# Don't use objects for traversable map
+trav_map_type: no_obj
+
+# domain randomization
+texture_randomization_freq: null
+object_randomization_freq: null
+
+# Example Turtlebot config
+robot:
+  name: Simplefetch
+  action_type: discrete
+  action_normalize: true
+  proprio_obs:
+    - trunk_qpos
+    - camera_qpos
+  reset_joint_pos: null
+  base_name: null
+  scale: 1.0
+  self_collision: true
+  rendering_params: null
+  rigid_trunk: false
+  default_trunk_offset: 0.365
+  controller_config:
+    base:
+      name: DifferentialDriveController
+    camera:
+      name: JointController
+
+# PPO parameters (sb3 defaults)
+# batch_size: 64
+# gamma: 0.99
+# gae_lambda: 0.95
+# n_steps: 2048
+# n_epochs: 10
+# learning_rate: 3e-4
+
+# PPO parameters (paper)
+batch_size: 128
+gamma: 0.99
+gae_lambda: 0.9
+n_steps: 4096
+n_epochs: 30
+learning_rate: 1e-4
+
+# Observation postprocessing
+stack_frames: 0
+normalize_env: false
+
+# task
+randomize_agent_reset: true
+randomize_obj_reset: true
+
+# termination condition
+max_step: 500
+
+# image
+image_width: 128
+image_height: 128
+vertical_fov: 120
+
+# depth
+depth_low: 0.0
+depth_high: 10.0
+
+# sensor noise
+depth_noise_rate: 0.0
+scan_noise_rate: 0.0
+
+use_egocentric_projection: true
+use_onehot_categorical: false
+
+hydra:
+  output_subdir: ${experiment_save_path}/${experiment_name}/hydra
+  # job:
+  #   chdir: False
+  run:
+    dir: ${experiment_save_path}/${experiment_name}/hydra_logging
+#   launcher:
+#     # override the number of jobs for joblib
+#     n_jobs: 4

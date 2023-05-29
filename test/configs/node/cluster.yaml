@@ -1,0 +1,5 @@
+# @package _global_
+#
+# Experiment name/path
+experiment_save_path: /svl/u/mjlbach/ray_results
+num_envs: 8

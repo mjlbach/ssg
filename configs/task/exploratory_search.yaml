@@ -1,0 +1,23 @@
+# @package _global_
+task: relational_search
+
+dist_tol: 1
+
+reward_functions:
+- search
+- potential
+
+pixel_reward_scaling: 350.0
+potential_reward_scaling: 1.0
+success_reward_scaling: 10.0
+visitation_reward_scaling: 750 # 750
+geodesic_reward_scaling: 1 # 750
+
+load_object_categories: NULL
+
+not_load_object_categories:
+  - carpet
+  - coffee_maker
+  - potted_plant
+  - sofa
+  - straight_chair

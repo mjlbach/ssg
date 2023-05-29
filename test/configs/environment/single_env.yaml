@@ -1,0 +1,5 @@
+# @package _global_
+#
+scene_id: Wainscott_0_int
+
+num_envs: 8
